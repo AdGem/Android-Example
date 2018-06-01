@@ -88,8 +88,10 @@ public class GameActivity extends AppCompatActivity {
 ### Playing videos:
 AdGem will download, prepare and cache standard videos if they are configured via configuration XML:
 ```xml
-<adgem-configuration standardVideoAdsEnabled="true|false"
-                     rewardedVideoAdsEnabled="true|false" />
+<adgem-configuration applicationId="ADGEM_APP_ID"
+		     standardVideoAdsEnabled="true|false"
+		     rewardedVideoAdsEnabled="true|false"
+		     offerWallEnabled="true|false" />
 ```
 
 Once AdGem has a standard/rewarded video ready to play, it will notify a client via the ```AdGemCallback```:
