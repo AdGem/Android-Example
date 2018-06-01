@@ -149,6 +149,21 @@ Once AdGem has Offer Wall ready, it will notify subcriber via the ```AdGemCallba
 ``` 
 Once Offer Wall is in ready state, it can be displayed by calling  ```adGem.showOfferWall()```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
 
+### Status codes:
+
+Same status codes will be used to notify about state of a standard/rewarded video or offer wall.
+
+| Constant value  | Description |
+| ------------- | ------------- |
+| AdGem.STATE_ERROR | Identifies that internal error ocurred. AdGem will retry download automatically. Exact error is immediately available via ```adGem.getError()``` |
+| AdGem.STATE_DISABLED | A component is disabled in configuration xml |
+| AdGem.STATE_INITIALIZING | AdGem is initializing this component now. Usually hapenns on a session start up |
+| AdGem.STATE_NEEDS_INITIALIZATION | AdGem is marked a component as the one that needs initialization |
+| AdGem.STATE_NEEDS_CAMPAIGN_REFRESH | Usually happens on initial lauunch or after invalidating internal caches |
+| AdGem.STATE_REFRESHING_CAMPAIGN | AdGem is checking for active campaign  |
+| AdGem.STATE_NEEDS_DOWNLOAD | AdGem has identified that campaign was no longer valid and will start downloading new media soon |
+| AdGem.STATE_DOWNLOADING | AdGem is downloading and caching new ads |
+| AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
