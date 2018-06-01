@@ -46,5 +46,28 @@ ProGuard
 
 Proguard config is automatically supplied with AAR. There is no additional configurations needed.
 
+API overview
+--------
+All communication with SDK can happen via the ```java AdGem``` class:
+```java
+AdGem adgem = AdGem.get();
+```
+There is no need to store instance of AdGem globally. SDK will cache it instance on a first call and will always return the same one for all subsequent calls to ```AdGem.get();```
+
+### AdGemCallback:
+AdGem SDK offers callbacks that notify when its internal state changes.
+```java
+AdGem adgem = AdGem.get();
+adgem.registerCallback(callback);
+```
+Once registered, a callback will be used to deliver SDK state change update.
+
+Keep in mind that AdGem will 
+### Playing standard videos
+
+
+
+
+
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
