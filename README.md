@@ -30,10 +30,10 @@ Overview
 AdGem android SDK is automatically configured by a buld system. To configure SDK specifically for your project:
 1. Add ```adgem_config.xml``` to ```res/values``` folder of your project structure:
 ```xml
-<adgem-configuration applicationId="1"
-                     offerWallEnabled="true"
-                     rewardedVideoAdsEnabled="true"
-                     standardVideoAdsEnabled="true" />
+<adgem-configuration applicationId="ADGEM_APP_ID"
+		     standardVideoAdsEnabled="true|false"
+		     rewardedVideoAdsEnabled="true|false"
+		     offerWallEnabled="true|false" />
 ```
 2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
 ```xml
