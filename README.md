@@ -100,11 +100,13 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
         @Override
         public void onStandardVideoAdStateChanged(int newState) {
 		// newState will notify a state of a standard video
+		// Full list of possible state codes is defined in AdGem class.
         }
         
         @Override
         public void onRewardedVideoAdStateChanged(int newState) {
 		// newState will notify a state of a rewarded video
+		// Full list of possible state codes is defined in AdGem class.
         }
 
         @Override
@@ -120,6 +122,8 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
 ``` 
 
 Once video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
+
+Note that once standard or rewarded video started playing, AdGem will immediately initiate downloading a next one. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
