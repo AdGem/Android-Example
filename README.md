@@ -35,7 +35,7 @@ AdGem android SDK is automatically configured by a buld system. To configure SDK
                      rewardedVideoAdsEnabled="true"
                      standardVideoAdsEnabled="true" />
 ```
-2. Add following tag to ```<application>``` of your ```AndroidManifest.xml```:
+2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
 ```xml
 <meta-data android:name="com.adgem.Config"
            android:resource="@xml/adgem_config"/>
@@ -85,9 +85,41 @@ public class GameActivity extends AppCompatActivity {
 }
 ```
 
-### Playing standard videos
+### Playing videos:
+AdGem will download, prepare and cache standard videos if they are configured via configuration XML:
+```xml
+<adgem-configuration standardVideoAdsEnabled="true|false"
+                     rewardedVideoAdsEnabled="true|false" />
+```
 
+Once AdGem has a standard/rewarded video ready to play, it will notify a client via the ```AdGemCallback```:
+```java
+    AdGemCallback callback = new AdGemCallback() {
+        @Override
+        public void onStandardVideoAdStateChanged(int newState) {
+            // newState will notify a state of a standard video
+        }
+        
+        @Override
+        public void onRewardedVideoAdStateChanged(int newState) {
+            // newState will notify a state of a rewarded video
+        }
+
+        @Override
+        public void onStandardVideoComplete() {
+			// Notifies that user has finished watching standard video ad.
+        }
+
+        @Override
+        public void onRewardedVideoComplete() {
+        	// Notifies that user has finished watching rewarded video ad.
+        }
+    };
+``` 
+
+Once video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
+
 
