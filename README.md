@@ -62,12 +62,32 @@ adgem.registerCallback(callback);
 ```
 Once registered, a callback will be used to deliver SDK state change update.
 
-Keep in mind that AdGem will 
+Keep in mind that AdGem will hold a strong reference to a callback. It is caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()``` then is must be unregistered in corresponding ```onDestroy()``` call.
+
+```java
+public class GameActivity extends AppCompatActivity {
+    private AdGem adGem;
+    
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ...
+        adGem = AdGem.get();
+        adGem.registerCallback(callback);
+        ...
+    }
+
+    @Override
+    protected void onDestroy() {
+        ...
+        adGem.unRegisterCallback(callback);
+        ...
+    }
+}
+```
+
 ### Playing standard videos
-
-
-
 
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
+
