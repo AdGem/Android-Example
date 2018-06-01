@@ -99,22 +99,22 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
     AdGemCallback callback = new AdGemCallback() {
         @Override
         public void onStandardVideoAdStateChanged(int newState) {
-            // newState will notify a state of a standard video
+		// newState will notify a state of a standard video
         }
         
         @Override
         public void onRewardedVideoAdStateChanged(int newState) {
-            // newState will notify a state of a rewarded video
+		// newState will notify a state of a rewarded video
         }
 
         @Override
         public void onStandardVideoComplete() {
-			// Notifies that user has finished watching standard video ad.
+		// Notifies that user has finished watching standard video ad.
         }
 
         @Override
         public void onRewardedVideoComplete() {
-        	// Notifies that user has finished watching rewarded video ad.
+		// Notifies that user has finished watching rewarded video ad.
         }
     };
 ``` 
