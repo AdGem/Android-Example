@@ -86,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
 ```
 
 ### Playing videos:
-AdGem will download, prepare and cache standard videos if they are configured via configuration XML:
+AdGem will download, prepare and cache standard and/or rewarded videos if they are configured via configuration XML:
 ```xml
 <adgem-configuration applicationId="ADGEM_APP_ID"
 		     standardVideoAdsEnabled="true|false"
@@ -111,12 +111,12 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
 
         @Override
         public void onStandardVideoComplete() {
-		// Notifies that user has finished watching standard video ad.
+		// Notifies that the user has finished watching standard video ad.
         }
 
         @Override
         public void onRewardedVideoComplete() {
-		// Notifies that user has finished watching rewarded video ad.
+		// Reward user for watching a rewarded video ad.
         }
     };
 ``` 
@@ -124,6 +124,31 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
 Once video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
 
 Note that once standard or rewarded video started playing, AdGem will immediately initiate downloading a next one. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
+
+### Offer Wall:
+AdGem will download and prepare offer wall if it is configured in adgem configuration XML:
+```xml
+<adgem-configuration ...
+		     offerWallEnabled="true|false" 
+		     ... />
+```
+
+Once AdGem has Offer Wall ready, it will notify subcriber via the ```AdGemCallback```:
+```java
+    AdGemCallback callback = new AdGemCallback() {
+            @Override
+            public void onOfferWallStateChanged(int newState) {
+		
+            }
+        
+            @Override
+            public void onRewardUser(int amount) {
+		// Notifies that the user has completed an action and should be rewarded with a specified amount. 
+            }
+    };
+``` 
+Once Offer Wall is in ready state, it can be displayed by calling  ```adGem.showOfferWall()```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
+
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 [2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
