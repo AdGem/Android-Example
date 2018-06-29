@@ -28,7 +28,7 @@ AdGem Android SDK requires at minimum Android 4.4.
 Overview
 --------
 AdGem android SDK is automatically configured by a buld system. To configure SDK specifically for your project:
-1. Add ```adgem_config.xml``` to ```res/values``` folder of your project structure:
+1. Add ```adgem_config.xml``` to ```res/xml``` folder of your project structure:
 ```xml
 <adgem-configuration applicationId="ADGEM_APP_ID"
 		     standardVideoAdsEnabled="true|false"
