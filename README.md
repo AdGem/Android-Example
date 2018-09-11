@@ -9,7 +9,7 @@ This is an extenden version of simplified integration guide [here][1].
 Download
 --------
 
-Latest AAR: [![Download](https://api.bintray.com/packages/adgemsdk/android/adgem-android/images/download.svg) ](https://bintray.com/adgemsdk/android/adgem-android/_latestVersion) or grab via:
+[![Download](https://api.bintray.com/packages/adgemsdk/android/adgem-android/images/download.svg) ](https://bintray.com/adgemsdk/android/adgem-android/_latestVersion)
 
 Gradle:
 ```groovy
