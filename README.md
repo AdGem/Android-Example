@@ -9,18 +9,21 @@ This is an extenden version of simplified integration guide [here][1].
 Download
 --------
 
-Download [the latest AAR][2] or grab via Maven:
+Latest AAR: [![Download](https://api.bintray.com/packages/adgemsdk/android/adgem-android/images/download.svg) ](https://bintray.com/adgemsdk/android/adgem-android/_latestVersion) or grab via:
+
+Gradle:
+```groovy
+implementation 'com.adgem:adgem-android:0.9.1'
+```
+
+Maven:
 ```xml
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>0.6.8</version>
+  <version>0.9.1</version>
   <type>pom</type>
 </dependency>
-```
-or Gradle:
-```groovy
-implementation 'com.adgem:adgem-android:0.6.8'
 ```
 
 AdGem Android SDK requires at minimum Android 4.4.
@@ -166,6 +169,3 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 | AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
-[2]: https://bintray.com/adgemsdk/android/download_file?file_path=com%2Fadgem%2Fadgem-android%2F0.6.8%2Fadgem-android-0.6.8.aar
-
-
