@@ -169,3 +169,6 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 | AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
 
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
+
+### Proguard:
+Applications do not need to add any aditional proguard rules. All necessary proguard configurations are automatically supplied by the library.
