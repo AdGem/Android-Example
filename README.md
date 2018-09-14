@@ -171,4 +171,4 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 [1]: https://help.adgem.com/sdk-integration/android-integration-guide
 
 ### Proguard:
-Applications do not need to add any aditional proguard rules. All necessary proguard configurations are automatically supplied by the library.
+Applications do not need to add any additional proguard rules. All necessary proguard configurations are automatically supplied by the library.
