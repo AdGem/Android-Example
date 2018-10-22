@@ -167,4 +167,4 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 | AdGem.STATE_DOWNLOADING | AdGem is downloading and caching new ads |
 | AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
 
-[1]: https://help.adgem.com/sdk-integration/android-integration-guide
+[1]: https://help.adgem.com/integration-guides/sdk-integration/android-sdk-integration-guide
