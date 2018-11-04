@@ -21,7 +21,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>0.9.9</version>
+  <version>0.9.8</version>
   <type>pom</type>
 </dependency>
 ```
