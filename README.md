@@ -159,12 +159,12 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 | ------------- | ------------- |
 | AdGem.STATE_ERROR | Identifies that internal error ocurred. AdGem will retry download automatically. Exact error is immediately available via ```adGem.getError()``` |
 | AdGem.STATE_DISABLED | A component is disabled in configuration xml |
-| AdGem.STATE_INITIALIZING | AdGem is initializing this component now. Usually hapenns on a session start up |
-| AdGem.STATE_NEEDS_INITIALIZATION | AdGem is marked a component as the one that needs initialization |
-| AdGem.STATE_NEEDS_CAMPAIGN_REFRESH | Usually happens on initial lauunch or after invalidating internal caches |
-| AdGem.STATE_REFRESHING_CAMPAIGN | AdGem is checking for active campaign  |
-| AdGem.STATE_NEEDS_DOWNLOAD | AdGem has identified that campaign was no longer valid and will start downloading new media soon |
-| AdGem.STATE_DOWNLOADING | AdGem is downloading and caching new ads |
+| AdGem.STATE_INITIALIZING | AdGem is initializing this component now. Usually hapenns on session start up |
+| AdGem.STATE_NEEDS_INITIALIZATION | Component needs initialization |
+| AdGem.STATE_NEEDS_CAMPAIGN_REFRESH | On initial launch or after invalidating internal caches |
+| AdGem.STATE_REFRESHING_CAMPAIGN | Checking for active campaign  |
+| AdGem.STATE_NEEDS_DOWNLOAD | Will start downloading new media soon |
+| AdGem.STATE_DOWNLOADING | Downloading and caching new ads |
 | AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
 
 [1]: https://help.adgem.com/integration-guides/sdk-integration/android-sdk-integration-guide
