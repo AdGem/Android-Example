@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="padding_x2">16dp</dimen>
+    <dimen name="horizontal_baseline">32dp</dimen>
+    <dimen name="vertical_baseline">56dp</dimen>
+</resources>

@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data android:name="com.adgem.Config"
+                   android:resource="@xml/adgem_config"/>
+
     </application>
 
 </manifest>

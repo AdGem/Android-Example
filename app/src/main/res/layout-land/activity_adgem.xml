@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:scaleType="centerCrop"
+               android:src="@drawable/adgem_background"
+               tools:ignore="ContentDescription"/>
+
+    <LinearLayout android:id="@+id/content"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="@dimen/horizontal_baseline"
+                  android:layout_marginBottom="@dimen/horizontal_baseline"
+                  android:layout_marginEnd="@dimen/vertical_baseline"
+                  android:baselineAligned="false">
+
+        <FrameLayout android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1"
+                     android:gravity="center_vertical">
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/adgem_logo"
+                       android:layout_gravity="center"
+                       android:contentDescription="@string/app_name"/>
+
+        </FrameLayout>
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:orientation="vertical"
+                      android:gravity="center_vertical">
+
+            <Button android:id="@+id/showStandardVideoButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_standard_video"/>
+
+            <Button android:id="@+id/showRewardedVideoButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_x2"
+                    android:text="@string/show_rewarded_video"/>
+
+            <Button android:id="@+id/showOfferWallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_x2"
+                    android:text="@string/show_offer_wall"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

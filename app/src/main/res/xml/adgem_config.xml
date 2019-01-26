@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Each application must register its own applicationId with adgem.com-->
+<adgem-configuration
+        applicationId="282"
+        offerWallEnabled="true"
+        rewardedVideoAdsEnabled="true"
+        standardVideoAdsEnabled="true"/>
