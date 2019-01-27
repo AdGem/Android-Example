@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AdGem</string>
+    <string name="show_offer_wall">Offer Wall Preview</string>
+    <string name="show_standard_video">Standard Video Preview</string>
+    <string name="show_rewarded_video">Rewarded Video Preview</string>
+
+</resources>
