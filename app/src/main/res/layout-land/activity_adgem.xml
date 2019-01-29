@@ -57,4 +57,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView android:id="@+id/adGemSdkVersionTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom|end"
+              android:layout_marginTop="@dimen/horizontal_baseline"
+              android:layout_marginBottom="@dimen/horizontal_baseline"
+              android:layout_marginEnd="@dimen/vertical_baseline"
+              android:layout_marginStart="@dimen/vertical_baseline"/>
+
 </FrameLayout>

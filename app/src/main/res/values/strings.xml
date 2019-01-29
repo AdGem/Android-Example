@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">AdGem</string>
-    <string name="show_offer_wall">Offer Wall Preview</string>
-    <string name="show_standard_video">Standard Video Preview</string>
-    <string name="show_rewarded_video">Rewarded Video Preview</string>
-
+    <string name="show_offer_wall">Offer Wall</string>
+    <string name="show_standard_video">Standard Video</string>
+    <string name="show_rewarded_video">Rewarded Video</string>
+    <string name="adgem_version">AdGem SDK v%1$s</string>
+    <string name="error">Error</string>
+    <string name="disabled">Disabled</string>
+    <string name="initializing">Initializing..</string>
+    <string name="refreshing">Refreshing campaign…</string>
+    <string name="downloading">Downloading…</string>
+    <string name="done_playing_standard_video">Done playing standard video</string>
+    <string name="done_playing_rewarded_video">Done playing rewarded video</string>
+    <string name="user_rewarded">User was rewarded with %1$d</string>
 </resources>

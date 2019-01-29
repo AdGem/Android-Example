@@ -3,15 +3,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def adGemVersion = "1.1.2"
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.adgem.android.example"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
+        buildConfigField 'String', 'ADGEM_VERSION', "\"$adGemVersion\""
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,8 +25,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.adgem:adgem-android:1.1.2'
+    implementation "com.adgem:adgem-android:$adGemVersion"
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation "com.google.android.material:material:1.0.0"
+    implementation 'com.google.android.material:material:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
