@@ -16,6 +16,8 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adgem)
 
+        adGemSdkVersionTextView.text = getString(R.string.adgem_version, BuildConfig.ADGEM_VERSION)
+
         showStandardVideoButton.setOnClickListener {
             adGem.showStandardVideoAd(this)
         }
