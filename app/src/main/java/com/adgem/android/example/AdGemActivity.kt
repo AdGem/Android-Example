@@ -64,15 +64,19 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
     }
 
     override fun onStandardVideoComplete() {
-        showMessage("Done playing standard video")
-    }
-
-    override fun onRewardUser(amount: Int) {
-        showMessage("User receives $amount")
+        showMessage(R.string.done_playing_standard_video)
     }
 
     override fun onRewardedVideoComplete() {
-        showMessage("Done playing rewarded video")
+        showMessage(R.string.done_playing_rewarded_video)
+    }
+
+    override fun onRewardUser(amount: Int) {
+        showMessage(getString(R.string.user_rewarded, amount))
+    }
+
+    private fun showMessage(@StringRes text: Int) {
+        showMessage(getString(text))
     }
 
     private fun showMessage(text: String) {

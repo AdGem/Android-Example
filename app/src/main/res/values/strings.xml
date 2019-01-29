@@ -9,4 +9,7 @@
     <string name="initializing">Initializing..</string>
     <string name="refreshing">Refreshing campaign…</string>
     <string name="downloading">Downloading…</string>
+    <string name="done_playing_standard_video">Done playing standard video</string>
+    <string name="done_playing_rewarded_video">Done playing rewarded video</string>
+    <string name="user_rewarded">User was rewarded with %1$d</string>
 </resources>
