@@ -1,7 +1,10 @@
 package com.adgem.android.example
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+import android.widget.Button
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
 import com.adgem.android.AdGemCallback
@@ -14,20 +17,30 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_adgem)
 
         adGemSdkVersionTextView.text = getString(R.string.adgem_version, BuildConfig.ADGEM_VERSION)
 
-        showStandardVideoButton.setOnClickListener {
-            adGem.showStandardVideoAd(this)
+        showStandardVideoButton.apply {
+            setOnClickListener {
+                adGem.showStandardVideoAd(this@AdGemActivity)
+            }
+            updateWithAdGemState(adGem.standardVideoAdState, R.string.show_standard_video)
         }
 
-        showRewardedVideoButton.setOnClickListener {
-            adGem.showRewardedVideoAd(this)
+        showRewardedVideoButton.apply {
+            setOnClickListener {
+                adGem.showRewardedVideoAd(this@AdGemActivity)
+            }
+            updateWithAdGemState(adGem.rewardedVideoAdState, R.string.show_rewarded_video)
         }
 
-        showOfferWallButton.setOnClickListener {
-            adGem.showOfferWall(this)
+        showOfferWallButton.apply {
+            setOnClickListener {
+                adGem.showOfferWall(this@AdGemActivity)
+            }
+            updateWithAdGemState(adGem.offerWallState, R.string.show_offer_wall)
         }
 
         adGem.registerCallback(this)
@@ -39,15 +52,15 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
     }
 
     override fun onStandardVideoAdStateChanged(newState: Int) {
-        showStandardVideoButton.isEnabled = newState == AdGem.STATE_READY
+        showStandardVideoButton.updateWithAdGemState(newState, R.string.show_standard_video)
     }
 
     override fun onRewardedVideoAdStateChanged(newState: Int) {
-        showRewardedVideoButton.isEnabled = newState == AdGem.STATE_READY
+        showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_video)
     }
 
     override fun onOfferWallStateChanged(newState: Int) {
-        showOfferWallButton.isEnabled = newState == AdGem.STATE_READY
+        showOfferWallButton.updateWithAdGemState(newState, R.string.show_offer_wall)
     }
 
     override fun onStandardVideoComplete() {
@@ -64,5 +77,29 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
 
     private fun showMessage(text: String) {
         Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_SHORT).show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun Button.updateWithAdGemState(state: Int, @StringRes buttonText: Int) {
+        if (state == AdGem.STATE_READY) {
+            isEnabled = true
+            setText(buttonText)
+        } else {
+            isEnabled = false
+            val stateText = when (state) {
+                AdGem.STATE_ERROR -> getString(R.string.error)
+                AdGem.STATE_DISABLED -> getString(R.string.disabled)
+                AdGem.STATE_NEEDS_INITIALIZATION,
+                AdGem.STATE_INITIALIZING -> getString(R.string.initializing)
+                AdGem.STATE_NEEDS_CAMPAIGN_REFRESH,
+                AdGem.STATE_REFRESHING_CAMPAIGN -> getString(R.string.refreshing)
+                AdGem.STATE_NEEDS_DOWNLOAD,
+                AdGem.STATE_DOWNLOADING -> getString(R.string.downloading)
+                else -> null
+            }
+            if (stateText != null) {
+                text = "${getString(buttonText)} ($stateText)"
+            }
+        }
     }
 }

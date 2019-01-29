@@ -4,5 +4,9 @@
     <string name="show_standard_video">Standard Video</string>
     <string name="show_rewarded_video">Rewarded Video</string>
     <string name="adgem_version">AdGem SDK v%1$s</string>
-
+    <string name="error">Error</string>
+    <string name="disabled">Disabled</string>
+    <string name="initializing">Initializing..</string>
+    <string name="refreshing">Refreshing campaign…</string>
+    <string name="downloading">Downloading…</string>
 </resources>
