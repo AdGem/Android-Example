@@ -4,4 +4,5 @@
         applicationId="282"
         offerWallEnabled="true"
         rewardedVideoAdsEnabled="true"
-        standardVideoAdsEnabled="true"/>
+        standardVideoAdsEnabled="true"
+        debuggable="true"/>
