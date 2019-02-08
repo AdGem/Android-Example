@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def adGemVersion = "1.1.4"
+def adGemVersion = "1.2.0"
 
 android {
     compileSdkVersion 28
@@ -11,16 +11,21 @@ android {
         applicationId "com.adgem.android.example"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
         buildConfigField 'String', 'ADGEM_VERSION', "\"$adGemVersion\""
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
