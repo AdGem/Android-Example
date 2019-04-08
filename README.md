@@ -47,7 +47,7 @@ AdGem android SDK is automatically configured by a buld system. To configure SDK
 
 ProGuard
 --------
-All necessary proguard configurations are automatically supplied by the library. There is no additional configurations needed.
+All necessary proguard configurations are automatically supplied by the library. No additional configuration is needed.
 
 API overview
 --------
