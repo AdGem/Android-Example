@@ -27,7 +27,7 @@ Maven:
 </dependency>
 ```
 
-AdGem Android SDK requires at minimum Android 4.1.
+AdGem Android SDK requires, at minimum, Android 4.1.
 
 Overview
 --------
