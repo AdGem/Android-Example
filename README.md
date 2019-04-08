@@ -3,7 +3,7 @@ AdGem Android SDK
 
 Java native mobile optimized AdGem Android SDK.
 
-This is an extended version of simplified integration guide [here][1].
+This is an extended version of the simplified integration guide [here][1].
 
 PlayStore: https://play.google.com/store/apps/details?id=com.adgem.android.example
 
@@ -27,11 +27,11 @@ Maven:
 </dependency>
 ```
 
-AdGem Android SDK requires, at minimum, Android 4.1.
+AdGem Android SDK requires a minimum of Android 4.1.
 
 Overview
 --------
-AdGem android SDK is automatically configured by a buld system. To configure SDK specifically for your project:
+AdGem Android SDK is automatically configured by a build system. To configure the SDK specifically for your project:
 1. Add ```adgem_config.xml``` to ```res/xml``` folder of your project structure:
 ```xml
 <adgem-configuration applicationId="ADGEM_APP_ID"
@@ -51,21 +51,21 @@ All necessary proguard configurations are automatically supplied by the library.
 
 API overview
 --------
-All communication with SDK can happen via the ```java AdGem``` class:
+All communication with SDK happens via the ```java AdGem``` class:
 ```java
 AdGem adgem = AdGem.get();
 ```
-There is no need to store instance of AdGem globally. SDK will cache it instance on a first call and will always return the same one for all subsequent calls to ```AdGem.get();```
+There is no need to store instance of AdGem globally. The SDK will cache the instance on a first call and will always return the same one for all subsequent calls to ```AdGem.get();```
 
 ### AdGemCallback:
-AdGem SDK offers callbacks that notify when its internal state changes.
+The AdGem SDK provides callbacks with notifications of internal state changes.
 ```java
 AdGem adgem = AdGem.get();
 adgem.registerCallback(callback);
 ```
-Once registered, a callback will be used to deliver SDK state change update.
+Once registered, a callback will be used to deliver SDK state change updates.
 
-Keep in mind that AdGem will hold a strong reference to a callback. It is caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()``` then is must be unregistered in corresponding ```onDestroy()``` call.
+Keep in mind that AdGem will hold a strong reference to a callback. It is the caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()``` then it must be unregistered in corresponding ```onDestroy()``` call.
 
 ```java
 public class GameActivity extends AppCompatActivity {
@@ -124,19 +124,19 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
     };
 ``` 
 
-Once video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
+Once a video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
 
-Note that once standard or rewarded video started playing, AdGem will immediately initiate downloading a next one. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
+Note that once standard or rewarded video starts playing, AdGem will immediately initiate downloading the next video. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
 
 ### Offer Wall:
-AdGem will download and prepare offer wall if it is configured in adgem configuration XML:
+AdGem will download and prepare offer wall if it is configured in AdGem configuration XML:
 ```xml
 <adgem-configuration ...
 		     offerWallEnabled="true|false" 
 		     ... />
 ```
 
-Once AdGem has Offer Wall ready, it will notify subcriber via the ```AdGemCallback```:
+Once AdGem has an Offer Wall ready, it will notify subcriber via the ```AdGemCallback```:
 ```java
     AdGemCallback callback = new AdGemCallback() {
             @Override
