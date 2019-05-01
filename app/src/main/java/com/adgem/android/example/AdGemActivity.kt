@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
 import com.adgem.android.AdGemCallback
-import com.google.android.material.snackbar.Snackbar
+import com.adgem.android.OfferWallCallback
 import kotlinx.android.synthetic.main.activity_adgem.*
 
-class AdGemActivity : AppCompatActivity(), AdGemCallback {
+class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     private val adGem by lazy { AdGem.get() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,11 +45,13 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
         }
 
         adGem.registerCallback(this)
+        adGem.registerOfferWallCallback(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         adGem.unregisterCallback(this)
+        adGem.unregisterOfferWallCallback(this)
     }
 
     override fun onStandardVideoAdStateChanged(newState: Int) {
@@ -75,12 +78,16 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback {
         showMessage(getString(R.string.user_rewarded, amount))
     }
 
+    override fun onOfferWallClosed() {
+        showMessage(R.string.offer_wall_closed_hint)
+    }
+
     private fun showMessage(@StringRes text: Int) {
         showMessage(getString(text))
     }
 
     private fun showMessage(text: String) {
-        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(this,text, Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("SetTextI18n")
