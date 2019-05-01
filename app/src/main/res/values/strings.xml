@@ -12,4 +12,5 @@
     <string name="done_playing_standard_video">Done playing standard video</string>
     <string name="done_playing_rewarded_video">Done playing rewarded video</string>
     <string name="user_rewarded">User was rewarded with %1$d</string>
+    <string name="offer_wall_closed_hint">Offer wall rewards may come in later</string>
 </resources>

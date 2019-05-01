@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:1.2.6'
+implementation 'com.adgem:adgem-android:1.3.0'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>1.2.6</version>
+  <version>1.3.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -65,7 +65,7 @@ adgem.registerCallback(callback);
 ```
 Once registered, a callback will be used to deliver SDK state change updates.
 
-Keep in mind that AdGem will hold a strong reference to a callback. It is the caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()``` then it must be unregistered in corresponding ```onDestroy()``` call.
+Keep in mind that AdGem will hold a strong reference to a callback. It is the caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()```, then it must be unregistered in the corresponding ```onDestroy()``` call.
 
 ```java
 public class GameActivity extends AppCompatActivity {
@@ -131,26 +131,38 @@ Note that once standard or rewarded video starts playing, AdGem will immediately
 ### Offer Wall:
 AdGem will download and prepare offer wall if it is configured in AdGem configuration XML:
 ```xml
-<adgem-configuration ...
-		     offerWallEnabled="true|false" 
-		     ... />
+<adgem-configuration 
+  ...
+  offerWallEnabled="true|false"
+  ... />
 ```
 
-Once AdGem has an Offer Wall ready, it will notify subcriber via the ```AdGemCallback```:
+Once AdGem has an Offer Wall ready, it will notify subscriber via the ```OfferWallCallback```:
 ```java
-    AdGemCallback callback = new AdGemCallback() {
+    OfferWallCallback callback = new OfferWallCallback() {
             @Override
             public void onOfferWallStateChanged(int newState) {
 		
             }
         
             @Override
-            public void onRewardUser(int amount) {
-		// Notifies that the user has completed an action and should be rewarded with a specified amount. 
+            public void onOfferWallReward(int amount) {
+                // Notifies that the user has completed an action and should be rewarded with a specified amount. 
+            }
+            
+            @Override
+            public void onOfferWallClosed() {
+                // Notifies that the offer wall was closed. 
             }
     };
 ``` 
-Once Offer Wall is in ready state, it can be displayed by calling  ```adGem.showOfferWall()```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
+Offer wall callback may be registered through the instance of ```AdGem```:
+```java
+AdGem adgem = AdGem.get();
+adgem.registerOfferWallCallback(callback);
+```
+Once registered, a callback will be used to deliver offer wall updates.
+Once Offer Wall is in ready state, it can be displayed by calling  ```adGem.showOfferWall(activity)```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
 
 ### Status codes:
 
