@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:1.3.0'
+implementation 'com.adgem:adgem-android:1.4.1'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -124,7 +124,8 @@ Once AdGem has a standard/rewarded video ready to play, it will notify a client 
     };
 ``` 
 
-Once a video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
+Once a video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. If user cancels video play, cancellation event can be received via the ```AdGemCallback.onStandardVideoCancelled()``` or ```AdGemCallback.onRewardedVideoCancelled()``` respectively. 
+Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
 
 Note that once standard or rewarded video starts playing, AdGem will immediately initiate downloading the next video. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
 
