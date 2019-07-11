@@ -10,7 +10,9 @@
     <string name="refreshing">Refreshing campaign…</string>
     <string name="downloading">Downloading…</string>
     <string name="done_playing_standard_video">Done playing standard video</string>
+    <string name="cancel_playing_standard_video">Standard video playback cancelled</string>
     <string name="done_playing_rewarded_video">Done playing rewarded video</string>
+    <string name="cancel_playing_rewarded_video">Rewarded video playback cancelled</string>
     <string name="user_rewarded">User was rewarded with %1$d</string>
     <string name="offer_wall_closed_hint">Offer wall rewards may come in later</string>
 </resources>

@@ -70,8 +70,16 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
         showMessage(R.string.done_playing_standard_video)
     }
 
+    override fun onStandardVideoCancelled() {
+        showMessage(R.string.cancel_playing_standard_video)
+    }
+
     override fun onRewardedVideoComplete() {
         showMessage(R.string.done_playing_rewarded_video)
+    }
+
+    override fun onRewardedVideoCancelled() {
+        showMessage(R.string.cancel_playing_rewarded_video)
     }
 
     override fun onRewardUser(amount: Int) {
@@ -87,7 +95,7 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     }
 
     private fun showMessage(text: String) {
-        Toast.makeText(this,text, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("SetTextI18n")
