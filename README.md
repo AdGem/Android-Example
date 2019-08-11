@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:1.4.1'
+implementation 'com.adgem:adgem-android:1.5.0'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>1.4.1</version>
+  <version>1.5.0</version>
   <type>pom</type>
 </dependency>
 ```
