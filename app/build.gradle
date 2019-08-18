@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def adGemVersion = "1.5.0"
+def adGemVersion = "1.6.0"
 
 android {
     compileSdkVersion 28
@@ -19,6 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            // No additional proguard/R8 config is needed for AdGem SDK.
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
         }
     }
