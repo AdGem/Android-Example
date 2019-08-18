@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:1.5.0'
+implementation 'com.adgem:adgem-android:1.6.0'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -45,9 +45,9 @@ AdGem Android SDK is automatically configured by a build system. To configure th
            android:resource="@xml/adgem_config"/>
 ```
 
-ProGuard
+R8/ProGuard
 --------
-All necessary proguard configurations are automatically supplied by the library. No additional configuration is needed.
+All necessary R8 and proguard configurations are automatically supplied by the library. No additional configuration is needed.
 
 API overview
 --------
