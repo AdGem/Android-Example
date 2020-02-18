@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">AdGem</string>
     <string name="show_offer_wall">Offer Wall</string>
-    <string name="show_standard_video">Standard Video</string>
-    <string name="show_rewarded_video">Rewarded Video</string>
+    <string name="show_interstitial_ad">Interstitial Ad</string>
+    <string name="show_rewarded_ad">Rewarded Ad</string>
     <string name="adgem_version">AdGem SDK v%1$s</string>
     <string name="error">Error</string>
     <string name="disabled">Disabled</string>
     <string name="initializing">Initializing..</string>
     <string name="refreshing">Refreshing campaign…</string>
     <string name="downloading">Downloading…</string>
-    <string name="done_playing_standard_video">Done playing standard video</string>
-    <string name="cancel_playing_standard_video">Standard video playback cancelled</string>
-    <string name="done_playing_rewarded_video">Done playing rewarded video</string>
-    <string name="cancel_playing_rewarded_video">Rewarded video playback cancelled</string>
+    <string name="done_showing_interstitial_ad">Done showing interstitial ad</string>
+    <string name="done_showing_rewarded_ad">Done showing rewarded ad</string>
+    <string name="cancel_showing_rewarded_ad">Rewarded ad had been cancelled</string>
     <string name="user_rewarded">User was rewarded with %1$d</string>
     <string name="offer_wall_closed_hint">Offer wall rewards may come in later</string>
 </resources>
