@@ -25,16 +25,16 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
 
         showStandardVideoButton.apply {
             setOnClickListener {
-                adGem.showStandardVideoAd(this@AdGemActivity)
+                adGem.showInterstitialAd(this@AdGemActivity)
             }
-            updateWithAdGemState(adGem.standardVideoAdState, R.string.show_standard_video)
+            updateWithAdGemState(adGem.interstitialAdState, R.string.show_interstitial_ad)
         }
 
         showRewardedVideoButton.apply {
             setOnClickListener {
-                adGem.showRewardedVideoAd(this@AdGemActivity)
+                adGem.showRewardedAd(this@AdGemActivity)
             }
-            updateWithAdGemState(adGem.rewardedVideoAdState, R.string.show_rewarded_video)
+            updateWithAdGemState(adGem.rewardedAdState, R.string.show_rewarded_ad)
         }
 
         showOfferWallButton.apply {
@@ -54,32 +54,28 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
         adGem.unregisterOfferWallCallback(this)
     }
 
-    override fun onStandardVideoAdStateChanged(newState: Int) {
-        showStandardVideoButton.updateWithAdGemState(newState, R.string.show_standard_video)
+    override fun onInterstitialAdStateChanged(newState: Int) {
+        showStandardVideoButton.updateWithAdGemState(newState, R.string.show_interstitial_ad)
     }
 
-    override fun onRewardedVideoAdStateChanged(newState: Int) {
-        showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_video)
+    override fun onRewardedAdStateChanged(newState: Int) {
+        showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_ad)
     }
 
     override fun onOfferWallStateChanged(newState: Int) {
         showOfferWallButton.updateWithAdGemState(newState, R.string.show_offer_wall)
     }
 
-    override fun onStandardVideoComplete() {
-        showMessage(R.string.done_playing_standard_video)
+    override fun onInterstitialAdClosed() {
+        showMessage(R.string.done_showing_interstitial_ad)
     }
 
-    override fun onStandardVideoCancelled() {
-        showMessage(R.string.cancel_playing_standard_video)
+    override fun onRewardedAdComplete() {
+        showMessage(R.string.done_showing_rewarded_ad)
     }
 
-    override fun onRewardedVideoComplete() {
-        showMessage(R.string.done_playing_rewarded_video)
-    }
-
-    override fun onRewardedVideoCancelled() {
-        showMessage(R.string.cancel_playing_rewarded_video)
+    override fun onRewardedAdCancelled() {
+        showMessage(R.string.cancel_showing_rewarded_ad)
     }
 
     override fun onRewardUser(amount: Int) {

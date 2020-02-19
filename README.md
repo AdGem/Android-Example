@@ -1,7 +1,7 @@
 AdGem Android SDK
 ========
 
-Java native mobile optimized AdGem Android SDK.
+Java native, mobile optimized AdGem Android SDK.
 
 This is an extended version of the simplified integration guide [here][1].
 
@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:1.6.0'
+implementation 'com.adgem:adgem-android:2.1.0'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>1.6.0</version>
+  <version>2.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -31,12 +31,13 @@ AdGem Android SDK requires a minimum of Android 4.1.
 
 Overview
 --------
-AdGem Android SDK is automatically configured by a build system. To configure the SDK specifically for your project:
+AdGem Android SDK library is automatically downloaded by the build system. To configure SDK for your project:
 1. Add ```adgem_config.xml``` to ```res/xml``` folder of your project structure:
 ```xml
-<adgem-configuration applicationId="ADGEM_APP_ID"
-		     standardVideoAdsEnabled="true|false"
-		     rewardedVideoAdsEnabled="true|false"
+<adgem-configuration 
+             applicationId="ADGEM_APP_ID"
+		     interstitialAdsEnabled="true|false"
+		     rewardedAdsEnabled="true|false"
 		     offerWallEnabled="true|false" />
 ```
 2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
@@ -47,11 +48,11 @@ AdGem Android SDK is automatically configured by a build system. To configure th
 
 R8/ProGuard
 --------
-All necessary R8 and proguard configurations are automatically supplied by the library. No additional configuration is needed.
+All necessary R8 or Proguard configurations are automatically supplied by the library. No additional configuration is needed.
 
 API overview
 --------
-All communication with SDK happens via the ```java AdGem``` class:
+All communications with the SDK happen via the ```java AdGem``` class:
 ```java
 AdGem adgem = AdGem.get();
 ```
@@ -65,7 +66,7 @@ adgem.registerCallback(callback);
 ```
 Once registered, a callback will be used to deliver SDK state change updates.
 
-Keep in mind that AdGem will hold a strong reference to a callback. It is the caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()```, then it must be unregistered in the corresponding ```onDestroy()``` call.
+Keep in mind that AdGem will hold a strong reference to the callback. It is the caller's responsibility to unregister it. For example, if a callback is being registered in activity's ```onCreate()```, then it must be unregistered in the corresponding ```onDestroy()``` call.
 
 ```java
 public class GameActivity extends AppCompatActivity {
@@ -88,49 +89,25 @@ public class GameActivity extends AppCompatActivity {
 }
 ```
 
-### Playing videos:
-AdGem will download, prepare and cache standard and/or rewarded videos if they are configured via configuration XML:
+### Displaying ads:
+AdGem will download, prepare and cache interstitial and/or rewarded ads if they are configured via the configuration XML:
 ```xml
-<adgem-configuration applicationId="ADGEM_APP_ID"
+<adgem-configuration 
+             applicationId="ADGEM_APP_ID"
 		     standardVideoAdsEnabled="true|false"
 		     rewardedVideoAdsEnabled="true|false"
 		     offerWallEnabled="true|false" />
 ```
 
-Once AdGem has a standard/rewarded video ready to play, it will notify a client via the ```AdGemCallback```:
-```java
-    AdGemCallback callback = new AdGemCallback() {
-        @Override
-        public void onStandardVideoAdStateChanged(int newState) {
-		// newState will notify a state of a standard video
-		// Full list of possible state codes is defined in AdGem class.
-        }
-        
-        @Override
-        public void onRewardedVideoAdStateChanged(int newState) {
-		// newState will notify a state of a rewarded video
-		// Full list of possible state codes is defined in AdGem class.
-        }
+Once AdGem has an interstitial/rewarded video ready to play, it will notify a client via the ```AdGemCallback```.
 
-        @Override
-        public void onStandardVideoComplete() {
-		// Notifies that the user has finished watching standard video ad.
-        }
+Once the ad is in a ready state (as signaled by the callback), it can be shown either by calling ```adGem.showInterstitialAd()``` or ```adGem.showRewardedAd()``` respectively. If a user cancels ad play, cancellation event can be received via the ```AdGemCallback.onInterstitialAdClosed()``` or ```AdGemCallback.onRewardedAdCancelled()``` respectively. 
+Ad readiness flags are also available via: ```adGem.isInterstitialAdReady()``` and ```adGem.isRewardedAdReady()``` fields.
 
-        @Override
-        public void onRewardedVideoComplete() {
-		// Reward user for watching a rewarded video ad.
-        }
-    };
-``` 
-
-Once a video is in ready state (as signaled by a callback), it can be played either via ```adGem.showStandardVideoAd()``` or ```adGem.showRewardedVideoAd()``` respectively. If user cancels video play, cancellation event can be received via the ```AdGemCallback.onStandardVideoCancelled()``` or ```AdGemCallback.onRewardedVideoCancelled()``` respectively. 
-Video readiness flags are also available via: ```adGem.isStandardVideoAdReady()``` and ```adGem.isRewardedVideoAdReady()``` fields.
-
-Note that once standard or rewarded video starts playing, AdGem will immediately initiate downloading the next video. It is important to monitor changes in a video state since it will transition through multiple states before becoming "ready". 
+Note that once a standard or rewarded ad starts playing, AdGem will immediately initiate download of the next ad. It is important to monitor changes in an ad state since it will transition through multiple states before becoming "ready". 
 
 ### Offer Wall:
-AdGem will download and prepare offer wall if it is configured in AdGem configuration XML:
+AdGem will download and prepare the Offer Wall as it is configured in AdGem configuration XML:
 ```xml
 <adgem-configuration 
   ...
@@ -138,7 +115,7 @@ AdGem will download and prepare offer wall if it is configured in AdGem configur
   ... />
 ```
 
-Once AdGem has an Offer Wall ready, it will notify subscriber via the ```OfferWallCallback```:
+Once the Offer Wall is ready, AdGem will notify a subscriber via the ```OfferWallCallback```:
 ```java
     OfferWallCallback callback = new OfferWallCallback() {
             @Override
@@ -162,8 +139,8 @@ Offer wall callback may be registered through the instance of ```AdGem```:
 AdGem adgem = AdGem.get();
 adgem.registerOfferWallCallback(callback);
 ```
-Once registered, a callback will be used to deliver offer wall updates.
-Once Offer Wall is in ready state, it can be displayed by calling  ```adGem.showOfferWall(activity)```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
+Once registered, a callback will be used to deliver the offer wall updates.
+Once Offer Wall is in the ready state, it can be displayed by calling  ```adGem.showOfferWall(activity)```.  Offer Wall readiness flag is available via the ```adGem.isOfferWallReady()``` field.
 
 ### Status codes:
 
@@ -173,12 +150,12 @@ Same status codes will be used to notify about state of a standard/rewarded vide
 | ------------- | ------------- |
 | AdGem.STATE_ERROR | Identifies that internal error ocurred. AdGem will retry download automatically. Exact error is immediately available via ```adGem.getError()``` |
 | AdGem.STATE_DISABLED | A component is disabled in configuration xml |
-| AdGem.STATE_INITIALIZING | AdGem is initializing this component now. Usually hapenns on session start up |
+| AdGem.STATE_INITIALIZING | AdGem is initializing this component now. Usually happens on session start up |
 | AdGem.STATE_NEEDS_INITIALIZATION | Component needs initialization |
 | AdGem.STATE_NEEDS_CAMPAIGN_REFRESH | On initial launch or after invalidating internal caches |
 | AdGem.STATE_REFRESHING_CAMPAIGN | Checking for active campaign  |
-| AdGem.STATE_NEEDS_DOWNLOAD | Will start downloading new media soon |
+| AdGem.STATE_NEEDS_DOWNLOAD | Will start downloading new ad soon |
 | AdGem.STATE_DOWNLOADING | Downloading and caching new ads |
-| AdGem.STATE_READY | A component (video or offer wall) is ready to be displayed |
+| AdGem.STATE_READY | A component (ad or an offer wall) is ready to be displayed |
 
 [1]: https://adgem.com/docs/android/integration-guide/
