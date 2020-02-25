@@ -27,6 +27,15 @@ Maven:
 </dependency>
 ```
 
+build.gradle
+```groovy
+compileOptions {
+  sourceCompatibility JavaVersion.VERSION_1_8
+  targetCompatibility JavaVersion.VERSION_1_8
+}
+```
+
+
 AdGem Android SDK requires a minimum of Android 4.1.
 
 Overview
@@ -35,10 +44,10 @@ AdGem Android SDK library is automatically downloaded by the build system. To co
 1. Add ```adgem_config.xml``` to ```res/xml``` folder of your project structure:
 ```xml
 <adgem-configuration 
-             applicationId="ADGEM_APP_ID"
-		     interstitialAdsEnabled="true|false"
-		     rewardedAdsEnabled="true|false"
-		     offerWallEnabled="true|false" />
+            applicationId="ADGEM_APP_ID"
+            interstitialAdsEnabled="true|false"
+            rewardedAdsEnabled="true|false"
+            offerWallEnabled="true|false" />
 ```
 2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
 ```xml
@@ -93,10 +102,10 @@ public class GameActivity extends AppCompatActivity {
 AdGem will download, prepare and cache interstitial and/or rewarded ads if they are configured via the configuration XML:
 ```xml
 <adgem-configuration 
-             applicationId="ADGEM_APP_ID"
-		     standardVideoAdsEnabled="true|false"
-		     rewardedVideoAdsEnabled="true|false"
-		     offerWallEnabled="true|false" />
+            applicationId="ADGEM_APP_ID"
+            interstitialAdsEnabled="true|false"
+            rewardedVideoAdsEnabled="true|false"
+            offerWallEnabled="true|false" />
 ```
 
 Once AdGem has an interstitial/rewarded video ready to play, it will notify a client via the ```AdGemCallback```.
@@ -104,7 +113,7 @@ Once AdGem has an interstitial/rewarded video ready to play, it will notify a cl
 Once the ad is in a ready state (as signaled by the callback), it can be shown either by calling ```adGem.showInterstitialAd()``` or ```adGem.showRewardedAd()``` respectively. If a user cancels ad play, cancellation event can be received via the ```AdGemCallback.onInterstitialAdClosed()``` or ```AdGemCallback.onRewardedAdCancelled()``` respectively. 
 Ad readiness flags are also available via: ```adGem.isInterstitialAdReady()``` and ```adGem.isRewardedAdReady()``` fields.
 
-Note that once a standard or rewarded ad starts playing, AdGem will immediately initiate download of the next ad. It is important to monitor changes in an ad state since it will transition through multiple states before becoming "ready". 
+Note that once an interstitial or rewarded ad starts showing, AdGem will immediately initiate download of the next ad. It is important to monitor changes in an ad state since it will transition through multiple states before becoming "ready". 
 
 ### Offer Wall:
 AdGem will download and prepare the Offer Wall as it is configured in AdGem configuration XML:
@@ -144,7 +153,7 @@ Once Offer Wall is in the ready state, it can be displayed by calling  ```adGem.
 
 ### Status codes:
 
-Same status codes will be used to notify about state of a standard/rewarded video or offer wall.
+Same status codes will be used to notify about the state ads or offer wall.
 
 | Constant value  | Description |
 | ------------- | ------------- |
