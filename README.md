@@ -14,7 +14,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:2.1.0'
+implementation 'com.adgem:adgem-android:2.4.0'
 ```
 
 Maven:
@@ -22,7 +22,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>2.1.0</version>
+  <version>2.4.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -47,7 +47,8 @@ AdGem Android SDK library is automatically downloaded by the build system. To co
             applicationId="ADGEM_APP_ID"
             interstitialAdsEnabled="true|false"
             rewardedAdsEnabled="true|false"
-            offerWallEnabled="true|false" />
+            offerWallEnabled="true|false" 
+            lockOrientation="true|false" />
 ```
 2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
 ```xml
@@ -105,7 +106,8 @@ AdGem will download, prepare and cache interstitial and/or rewarded ads if they 
             applicationId="ADGEM_APP_ID"
             interstitialAdsEnabled="true|false"
             rewardedVideoAdsEnabled="true|false"
-            offerWallEnabled="true|false" />
+            offerWallEnabled="true|false"
+            lockOrientation="true|false"/>
 ```
 
 Once AdGem has an interstitial/rewarded video ready to play, it will notify a client via the ```AdGemCallback```.
@@ -114,6 +116,16 @@ Once the ad is in a ready state (as signaled by the callback), it can be shown e
 Ad readiness flags are also available via: ```adGem.isInterstitialAdReady()``` and ```adGem.isRewardedAdReady()``` fields.
 
 Note that once an interstitial or rewarded ad starts showing, AdGem will immediately initiate download of the next ad. It is important to monitor changes in an ad state since it will transition through multiple states before becoming "ready". 
+
+### Ads:
+AdGem will lock ad orientation to the same screen orientation configured in a publisher's console. To enable orientation locking use following configuration:
+```xml
+<adgem-configuration 
+  ...
+  lockOrientation="true|false"
+  ... />
+```
+This value is ```false``` by default.
 
 ### Offer Wall:
 AdGem will download and prepare the Offer Wall as it is configured in AdGem configuration XML:
