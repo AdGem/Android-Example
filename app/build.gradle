@@ -11,8 +11,8 @@ android {
         applicationId "com.adgem.android.example"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.15-dev"
+        versionCode 16
+        versionName "1.16-dev"
         buildConfigField 'String', 'ADGEM_VERSION', "\"$adGemVersion\""
     }
 
