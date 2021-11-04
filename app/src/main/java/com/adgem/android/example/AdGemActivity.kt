@@ -10,34 +10,36 @@ import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
 import com.adgem.android.AdGemCallback
 import com.adgem.android.OfferWallCallback
-import kotlinx.android.synthetic.main.activity_adgem.*
+import com.adgem.android.example.databinding.ActivityAdgemBinding
 
 class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     private val adGem by lazy { AdGem.get() }
+    private lateinit var binding : ActivityAdgemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS)
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_adgem)
+        binding = ActivityAdgemBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        adGemSdkVersionTextView.text = getString(R.string.adgem_version, BuildConfig.ADGEM_VERSION)
+        binding.adGemSdkVersionTextView.text = getString(R.string.adgem_version, BuildConfig.ADGEM_VERSION)
 
-        showStandardVideoButton.apply {
+        binding.showStandardVideoButton.apply {
             setOnClickListener {
                 adGem.showInterstitialAd(this@AdGemActivity)
             }
             updateWithAdGemState(adGem.interstitialAdState, R.string.show_interstitial_ad)
         }
 
-        showRewardedVideoButton.apply {
+        binding.showRewardedVideoButton.apply {
             setOnClickListener {
                 adGem.showRewardedAd(this@AdGemActivity)
             }
             updateWithAdGemState(adGem.rewardedAdState, R.string.show_rewarded_ad)
         }
 
-        showOfferWallButton.apply {
+        binding.showOfferWallButton.apply {
             setOnClickListener {
                 adGem.showOfferWall(this@AdGemActivity)
             }
@@ -55,15 +57,15 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     }
 
     override fun onInterstitialAdStateChanged(newState: Int) {
-        showStandardVideoButton.updateWithAdGemState(newState, R.string.show_interstitial_ad)
+        binding.showStandardVideoButton.updateWithAdGemState(newState, R.string.show_interstitial_ad)
     }
 
     override fun onRewardedAdStateChanged(newState: Int) {
-        showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_ad)
+        binding.showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_ad)
     }
 
     override fun onOfferWallStateChanged(newState: Int) {
-        showOfferWallButton.updateWithAdGemState(newState, R.string.show_offer_wall)
+        binding.showOfferWallButton.updateWithAdGemState(newState, R.string.show_offer_wall)
     }
 
     override fun onInterstitialAdClosed() {

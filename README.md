@@ -9,12 +9,11 @@ PlayStore: https://play.google.com/store/apps/details?id=com.adgem.android.examp
 
 Download
 --------
-
-[![Download](https://api.bintray.com/packages/adgemsdk/android/adgem-android/images/download.svg) ](https://bintray.com/adgemsdk/android/adgem-android/_latestVersion)
+[![Maven Central](https://img.shields.io/maven-central/v/com.adgem/adgem-android?style=flat-square)](https://search.maven.org/artifact/com.adgem/adgem-android)
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:2.4.0'
+implementation 'com.adgem:adgem-android:3.0.1'
 ```
 
 Maven:
@@ -22,7 +21,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>2.4.0</version>
+  <version>3.0.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -30,11 +29,10 @@ Maven:
 build.gradle
 ```groovy
 compileOptions {
-  sourceCompatibility JavaVersion.VERSION_1_8
-  targetCompatibility JavaVersion.VERSION_1_8
+  sourceCompatibility JavaVersion.VERSION_11
+  targetCompatibility JavaVersion.VERSION_11
 }
 ```
-
 
 AdGem Android SDK requires a minimum of Android 4.1.
 

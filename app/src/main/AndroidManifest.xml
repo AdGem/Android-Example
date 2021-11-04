@@ -11,7 +11,8 @@
                  android:theme="@style/AdGemTheme"
                  tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".AdGemActivity">
+        <activity android:name=".AdGemActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
