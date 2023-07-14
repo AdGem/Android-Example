@@ -1,4 +1,4 @@
-package com.adgem.android.example
+package com.adgem.example
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,12 +9,13 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
 import com.adgem.android.AdGemCallback
+import com.adgem.android.BuildConfig
 import com.adgem.android.OfferWallCallback
-import com.adgem.android.example.databinding.ActivityAdgemBinding
+import com.adgem.example.databinding.ActivityAdgemBinding
 
 class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     private val adGem by lazy { AdGem.get() }
-    private lateinit var binding : ActivityAdgemBinding
+    private lateinit var binding: ActivityAdgemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setFlags(FLAG_LAYOUT_NO_LIMITS, FLAG_LAYOUT_NO_LIMITS)
@@ -23,7 +24,8 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
         binding = ActivityAdgemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.adGemSdkVersionTextView.text = getString(R.string.adgem_version, BuildConfig.ADGEM_VERSION)
+        binding.adGemSdkVersionTextView.text =
+            getString(R.string.adgem_version, BuildConfig.VERSION_NAME)
 
         binding.showStandardVideoButton.apply {
             setOnClickListener {
@@ -57,7 +59,10 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
     }
 
     override fun onInterstitialAdStateChanged(newState: Int) {
-        binding.showStandardVideoButton.updateWithAdGemState(newState, R.string.show_interstitial_ad)
+        binding.showStandardVideoButton.updateWithAdGemState(
+            newState,
+            R.string.show_interstitial_ad
+        )
     }
 
     override fun onRewardedAdStateChanged(newState: Int) {

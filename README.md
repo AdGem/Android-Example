@@ -13,7 +13,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:3.2.0'
+implementation 'com.adgem:adgem-android:3.3.0'
 ```
 
 Maven:
@@ -21,7 +21,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>3.2.0</version>
+  <version>3.3.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -29,8 +29,8 @@ Maven:
 build.gradle
 ```groovy
 compileOptions {
-  sourceCompatibility JavaVersion.VERSION_11
-  targetCompatibility JavaVersion.VERSION_11
+  sourceCompatibility JavaVersion.VERSION_17
+  targetCompatibility JavaVersion.VERSION_17
 }
 ```
 
