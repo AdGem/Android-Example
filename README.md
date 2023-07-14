@@ -34,7 +34,7 @@ compileOptions {
 }
 ```
 
-AdGem Android SDK requires a minimum of Android 9.0.
+AdGem Android SDK requires a minimum of Android 5.0.
 
 Overview
 --------
