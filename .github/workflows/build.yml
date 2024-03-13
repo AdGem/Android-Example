@@ -1,0 +1,39 @@
+name: test
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_call:
+  pull_request:
+
+env:
+  JAVA_VERSION: 17
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+      # Set Current Date As Env Variable
+    - name: Set current date as env variable
+      run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+    # Set Repository Name As Env Variable
+    - name: Set repository name as env variable
+      run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v3
+      
+    # Run Tests Build
+    - name: Run gradle tests
+      run: ./gradlew test
+
+    # Run Build Project
+    - name: Build gradle project
+      run: ./gradlew build
