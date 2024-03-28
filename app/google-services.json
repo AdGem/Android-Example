@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "TODO",
+    "project_id": "TODO",
+    "storage_bucket": "TODO"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969525308461:android:dd63032ab439f41d575ca4",
+        "android_client_info": {
+          "package_name": "com.adgem.android.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "TODO"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
