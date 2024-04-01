@@ -1,0 +1,28 @@
+name: fastlane-deploy
+
+on:
+  workflow_call:
+  release:
+    types: [published]
+
+env:
+  JAVA_VERSION: 17
+
+jobs:
+  fastlane-deploy:
+    name: Run Fastlane
+    runs-on: ubuntu-latest
+    env:
+      FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+      FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - name: Run Fastlane
+        run: |
+          bundle install
+          bundle exec fastlane playstore
