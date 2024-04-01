@@ -37,9 +37,9 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: ${{ vars.BOT_USERNAME }}
+          GIT_AUTHOR_NAME: ${{ vars.PUBLIC_BOT_USERNAME }}
           GIT_AUTHOR_EMAIL: ${{ vars.PUBLIC_BOT_EMAIL }}
-          GIT_COMMITTER_NAME: ${{ vars.BOT_USERNAME }}
+          GIT_COMMITTER_NAME: ${{ vars.PUBLIC_BOT_USERNAME }}
           GIT_COMMITTER_EMAIL: ${{ vars.PUBLIC_BOT_EMAIL }}
         run: npx semantic-release
 
