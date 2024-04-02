@@ -25,7 +25,11 @@ jobs:
       - name: Run Fastlane
         run: |
           bundle install
-          bundle exec fastlane release version:"${{ github.ref }}"
+          echo "ref name: $GITHUB_REF_NAME"
+          echo "ref name: $GITHUB_ACTION"
+          echo "ref name: $GITHUB_EVENT_NAME"
+          echo "ref name: $GITHUB_JOB"
+          bundle exec fastlane release version:$GITHUB_REF_NAME
 
   fastlane-deploy:
     needs: fastlane-release
