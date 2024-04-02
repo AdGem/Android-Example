@@ -1,0 +1,43 @@
+name: fastlane-deploy
+
+on:
+  workflow_call:
+  release:
+    types: [published]
+
+env:
+  JAVA_VERSION: 17
+
+jobs:
+  fastlane-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - name: Run Fastlane
+        run: |
+          bundle install
+          bundle exec fastlane release version:"${{ github.ref }}"
+
+  fastlane-deploy:
+    needs: fastlane-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - name: Run Fastlane
+        run: |
+          bundle install
+          bundle exec fastlane playstore
