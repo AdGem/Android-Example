@@ -24,11 +24,11 @@ platform :android do
 
     # set the version code and version name
     android_set_version_code(
-      gradle_file: 'build.gradle.kts'
+      gradle_file: 'app/build.gradle.kts'
     )
     android_set_version_name(
       version_name: options[:version],
-      gradle_file: 'build.gradle.kts'
+      gradle_file: 'app/build.gradle.kts'
     )
   end
 
