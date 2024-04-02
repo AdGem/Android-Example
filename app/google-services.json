@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "TODO",
-    "project_id": "TODO",
-    "storage_bucket": "TODO"
+    "project_number": "1037242127081",
+    "project_id": "androidsdk-example",
+    "storage_bucket": "androidsdk-example.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:969525308461:android:dd63032ab439f41d575ca4",
+        "mobilesdk_app_id": "1:1037242127081:android:e6c38b03a4e11e46119678",
         "android_client_info": {
           "package_name": "com.adgem.android.example"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "TODO"
+          "current_key": "AIzaSyCS1t9A8ukWrspxnhpEL_ey-_vM8a8kq9k"
         }
       ],
       "services": {
