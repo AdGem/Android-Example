@@ -32,13 +32,33 @@ platform :android do
     )
   end
 
-  lane :playstore do
-    gradle(
-      task: 'assemble',
-      build_type: 'Release'
+  desc "Distribute builds via firebase"
+  lane :firebase do
+    app = "1:1037242127081:android:e6c38b03a4e11e46119678"
+    credentials = "./app/google-services.json"
+
+    # For firebase app distribution, we just use relative incremental numbers
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: app,
+      service_credentials_file: credentials
     )
 
-    upload_to_play_store
+    release = get_github_release(
+      url: "AdGem/Android-Example",
+      version: options[:version],
+      api_token: ENV['GH_TOKEN']
+    )
+
+    gradle(
+      task: ":app:clean :app:build"
+    )
+
+    firebase_app_distribution(
+      app: app,
+      service_credentials_file: credentials
+      groups: "qa-testers",
+      release_notes: release["body"]
+    )
   end
 
 end
