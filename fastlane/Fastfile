@@ -55,7 +55,7 @@ platform :android do
 
     firebase_app_distribution(
       app: app,
-      service_credentials_file: credentials
+      service_credentials_file: credentials,
       groups: "qa-testers",
       release_notes: release["body"]
     )
