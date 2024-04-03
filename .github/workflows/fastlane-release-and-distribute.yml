@@ -1,4 +1,4 @@
-name: fastlane-deploy
+name: fastlane-deploy-and-distribute
 
 on:
   workflow_call:
@@ -27,7 +27,7 @@ jobs:
           bundle install
           bundle exec fastlane release version:$GITHUB_REF_NAME
 
-  fastlane-deploy:
+  fastlane-distribute:
     needs: fastlane-release
     runs-on: ubuntu-latest
     steps:
@@ -44,4 +44,6 @@ jobs:
       - name: Run Fastlane
         run: |
           bundle install
-          bundle exec fastlane playstore
+          bundle exec fastlane distribute
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
