@@ -37,8 +37,8 @@ jobs:
       
     # Run Tests Build
     - name: Run gradle tests
-      run: ./gradlew test
+      run: ./gradlew :app:clean :app:test
 
     # Run Build Project
     - name: Build gradle project
-      run: ./gradlew build
+      run: ./gradlew :app:clean :app:build
