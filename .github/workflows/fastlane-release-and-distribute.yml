@@ -44,6 +44,6 @@ jobs:
       - name: Run Fastlane
         run: |
           bundle install
-          bundle exec fastlane distribute
+          bundle exec fastlane firebase
         env:
           GH_TOKEN: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
