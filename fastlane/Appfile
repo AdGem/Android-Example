@@ -1,2 +1,2 @@
-json_key_file("./app/google-services.json")
+json_key_file("./fastlane/gcp/android-sdk-play-store.json")
 package_name("com.adgem.android.example")
