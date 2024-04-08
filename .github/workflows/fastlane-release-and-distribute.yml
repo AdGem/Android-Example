@@ -34,7 +34,7 @@ jobs:
       - name: Add Firebase Service Account to play store json credentials file
         run: |
           mkdir -p fastlane/gcp
-          echo ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} > fastlane/gcp/android-sdk-play-store.json
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > fastlane/gcp/android-sdk-play-store.json
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: actions/setup-java@v4
