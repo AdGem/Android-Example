@@ -49,6 +49,8 @@ jobs:
       - name: Run Fastlane
         run: |
           ls -al
+          ls -al ./fastlane/gcp
+          cat ./fastlane/gcp/android-sdk-play-store.json
           bundle install
           bundle exec fastlane firebase
         env:
