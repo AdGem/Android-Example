@@ -47,6 +47,7 @@ jobs:
           ruby-version: 3.2
       - name: Run Fastlane
         run: |
+          cat ./fastlane/gcp/android-sdk-play-store.json
           bundle install
           bundle exec fastlane firebase
         env:
