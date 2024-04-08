@@ -35,6 +35,7 @@ jobs:
         run: |
           mkdir -p ./fastlane/gcp
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > ./fastlane/gcp/android-sdk-play-store.json
+          ls -al
           ls -al ./fastlane/gcp
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,6 +50,7 @@ jobs:
       - name: Run Fastlane
         run: |
           ls -al
+          ls -al fastlane
           ls -al ./fastlane/gcp
           cat ./fastlane/gcp/android-sdk-play-store.json
           bundle install
