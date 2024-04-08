@@ -31,14 +31,12 @@ jobs:
     needs: fastlane-release
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Add Firebase Service Account to play store json credentials file
         run: |
           mkdir -p ./fastlane/gcp
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > ./fastlane/gcp/android-sdk-play-store.json
-          ls -al
-          ls -al ./fastlane/gcp
-      - name: Checkout code
-        uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
@@ -49,10 +47,6 @@ jobs:
           ruby-version: 3.2
       - name: Run Fastlane
         run: |
-          ls -al
-          ls -al fastlane
-          ls -al ./fastlane/gcp
-          cat ./fastlane/gcp/android-sdk-play-store.json
           bundle install
           bundle exec fastlane firebase
         env:
