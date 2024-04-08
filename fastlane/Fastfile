@@ -35,7 +35,7 @@ platform :android do
   desc "Distribute builds via firebase"
   lane :firebase do
     app = "1:1037242127081:android:e6c38b03a4e11e46119678"
-    credentials = "./app/google-services.json"
+    credentials = "./fastlane/gcp/android-sdk-play-store.json"
 
     # For firebase app distribution, we just use relative incremental numbers
     latest_release = firebase_app_distribution_get_latest_release(
