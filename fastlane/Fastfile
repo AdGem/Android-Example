@@ -37,12 +37,6 @@ platform :android do
     app = "1:1037242127081:android:e6c38b03a4e11e46119678"
     credentials = "fastlane/gcp/android-sdk-play-store.json"
 
-    # For firebase app distribution, we just use relative incremental numbers
-    latest_release = firebase_app_distribution_get_latest_release(
-      app: app,
-      service_credentials_file: credentials
-    )
-
     release = get_github_release(
       url: "AdGem/Android-Example",
       version: options[:version],
