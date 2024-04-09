@@ -33,6 +33,11 @@ jobs:
     env:
       FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          cache: 'gradle'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'microsoft'
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Add Firebase Service Account to play store json credentials file
