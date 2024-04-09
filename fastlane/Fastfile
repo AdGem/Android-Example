@@ -33,7 +33,7 @@ platform :android do
   end
 
   desc "Distribute builds via firebase"
-  lane :firebase do
+  lane :firebase do |options|
     app = "1:1037242127081:android:e6c38b03a4e11e46119678"
     credentials = "fastlane/gcp/android-sdk-play-store.json"
 
