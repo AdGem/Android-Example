@@ -39,17 +39,12 @@ jobs:
         run: |
           mkdir -p ./fastlane/gcp
           echo $FIREBASE_SERVICE_ACCOUNT > ./fastlane/gcp/android-sdk-play-store.json
-      - uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'microsoft'
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2
       - name: Run Fastlane
         run: |
-          tail ./fastlane/gcp/android-sdk-play-store.json
           bundle install
           bundle exec fastlane firebase
         env:
