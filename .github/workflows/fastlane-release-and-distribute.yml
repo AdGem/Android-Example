@@ -51,6 +51,6 @@ jobs:
           bundler-cache: true
       - name: Run Fastlane
         run: |
-          bundle exec fastlane firebase version:$GITHUB_REF_NAME
+          bundle exec fastlane firebase version:$GITHUB_REF_NAME --verbose
         env:
           GH_TOKEN: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
