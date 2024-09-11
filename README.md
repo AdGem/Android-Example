@@ -65,7 +65,7 @@ AdGem adgem = AdGem.get();
 There is no need to store instance of AdGem globally. The SDK will cache the instance on a first call and will always return the same one for all subsequent calls to ```AdGem.get();```
 
 ### Player Metadata:
-For increased fraud protection, we require you set the [playerId](../android-optional-parameters/)  (a unique id for your user) parameter.
+For increased fraud protection, we require you set the `playerId`  (a unique id for your user) parameter.
 ```java
   PlayerMetadata player = new PlayerMetadata.Builder.createWithPlayerId("myPlayerId")
     .age(23)
