@@ -1,19 +1,19 @@
 package com.adgem.example
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
-import com.adgem.android.AdGemCallback
 import com.adgem.android.BuildConfig
-import com.adgem.android.OfferWallCallback
+import com.adgem.android.OfferwallCallback
+import com.adgem.android.PlayerMetadata
 import com.adgem.example.databinding.ActivityAdgemBinding
+import java.util.UUID
 
-class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
+class AdGemActivity : AppCompatActivity(), OfferwallCallback {
     private val adGem by lazy { AdGem.get() }
     private lateinit var binding: ActivityAdgemBinding
 
@@ -27,70 +27,32 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
         binding.adGemSdkVersionTextView.text =
             getString(R.string.adgem_version, BuildConfig.VERSION_NAME)
 
-        binding.showStandardVideoButton.apply {
-            setOnClickListener {
-                adGem.showInterstitialAd(this@AdGemActivity)
-            }
-            updateWithAdGemState(adGem.interstitialAdState, R.string.show_interstitial_ad)
-        }
-
-        binding.showRewardedVideoButton.apply {
-            setOnClickListener {
-                adGem.showRewardedAd(this@AdGemActivity)
-            }
-            updateWithAdGemState(adGem.rewardedAdState, R.string.show_rewarded_ad)
-        }
-
         binding.showOfferWallButton.apply {
             setOnClickListener {
-                adGem.showOfferWall(this@AdGemActivity)
+                adGem.showOfferwall(this@AdGemActivity)
             }
-            updateWithAdGemState(adGem.offerWallState, R.string.show_offer_wall)
         }
 
-        adGem.registerCallback(this)
-        adGem.registerOfferWallCallback(this)
+        adGem.registerOfferwallCallback(this)
+
+        applyAdGemPlayerId()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        adGem.unregisterCallback(this)
-        adGem.unregisterOfferWallCallback(this)
+        adGem.unregisterOfferwallCallback(this)
     }
 
-    override fun onInterstitialAdStateChanged(newState: Int) {
-        binding.showStandardVideoButton.updateWithAdGemState(
-            newState,
-            R.string.show_interstitial_ad
-        )
-    }
-
-    override fun onRewardedAdStateChanged(newState: Int) {
-        binding.showRewardedVideoButton.updateWithAdGemState(newState, R.string.show_rewarded_ad)
-    }
-
-    override fun onOfferWallStateChanged(newState: Int) {
-        binding.showOfferWallButton.updateWithAdGemState(newState, R.string.show_offer_wall)
-    }
-
-    override fun onInterstitialAdClosed() {
-        showMessage(R.string.done_showing_interstitial_ad)
-    }
-
-    override fun onRewardedAdComplete() {
-        showMessage(R.string.done_showing_rewarded_ad)
-    }
-
-    override fun onRewardedAdCancelled() {
-        showMessage(R.string.cancel_showing_rewarded_ad)
-    }
-
-    override fun onRewardUser(amount: Int) {
+    override fun onOfferwallRewardReceived(amount: Int) {
         showMessage(getString(R.string.user_rewarded, amount))
     }
 
-    override fun onOfferWallClosed() {
+    override fun onOfferwallClosed() {
         showMessage(R.string.offer_wall_closed_hint)
+    }
+
+    override fun onOfferwallLoadingFailed(error: String?) {
+        error?.let { showMessage(it) }
     }
 
     private fun showMessage(@StringRes text: Int) {
@@ -101,27 +63,29 @@ class AdGemActivity : AppCompatActivity(), AdGemCallback, OfferWallCallback {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun Button.updateWithAdGemState(state: Int, @StringRes buttonText: Int) {
-        if (state == AdGem.STATE_READY) {
-            isEnabled = true
-            setText(buttonText)
-        } else {
-            isEnabled = false
-            val stateText = when (state) {
-                AdGem.STATE_ERROR -> getString(R.string.error)
-                AdGem.STATE_DISABLED -> getString(R.string.disabled)
-                AdGem.STATE_NEEDS_INITIALIZATION,
-                AdGem.STATE_INITIALIZING -> getString(R.string.initializing)
-                AdGem.STATE_NEEDS_CAMPAIGN_REFRESH,
-                AdGem.STATE_REFRESHING_CAMPAIGN -> getString(R.string.refreshing)
-                AdGem.STATE_NEEDS_DOWNLOAD,
-                AdGem.STATE_DOWNLOADING -> getString(R.string.downloading)
-                else -> null
-            }
-            if (stateText != null) {
-                text = "${getString(buttonText)} ($stateText)"
-            }
+    private fun applyAdGemPlayerId() {
+        val playerIdKey = "PLAYER_ID"
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        var playerId = sharedPreferences.getString(playerIdKey, null)
+        if (playerId == null) {
+            playerId = "${UUID.randomUUID()}"
+            sharedPreferences.edit().putString(playerIdKey, playerId).apply()
         }
+
+        val metadata = PlayerMetadata.Builder.createWithPlayerId(playerId)
+            .age(32)
+            .createdAt("2018-11-10 18:39:45")
+            .gender(PlayerMetadata.Gender.FEMALE)
+            .iapTotalUsd(123f)
+            .level(100)
+            .placement(1000)
+            .customField1("custom_field_1")
+            .customField2("custom_field_2")
+            .customField3("custom_field_3")
+            .customField4("custom_field_4")
+            .customField5("custom_field_5")
+            .build()
+        AdGem.get().setPlayerMetaData(metadata)
     }
 }

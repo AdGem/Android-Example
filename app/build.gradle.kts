@@ -27,7 +27,8 @@ android {
 }
 
 dependencies {
-    implementation("com.adgem:adgem-android:3.3.0")
+    implementation("com.adgem:adgem-android:4.0.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
 }
