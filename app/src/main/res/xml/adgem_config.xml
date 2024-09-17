@@ -2,7 +2,5 @@
 <!-- Each application must register its own applicationId with adgem.com-->
 <adgem-configuration
         applicationId="282"
-        offerWallEnabled="true"
-        interstitialAdsEnabled="true"
-        rewardedAdsEnabled="true"
+        offerwallEnabled="true"
         debuggable="true"/>

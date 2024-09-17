@@ -31,19 +31,6 @@
                android:layout_height="0dp"
                android:layout_weight="2"/>
 
-        <Button android:id="@+id/showStandardVideoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:text="@string/show_interstitial_ad"/>
-
-        <Button android:id="@+id/showRewardedVideoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="@dimen/padding_x2"
-                android:text="@string/show_rewarded_ad"/>
-
         <Button android:id="@+id/showOfferWallButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
