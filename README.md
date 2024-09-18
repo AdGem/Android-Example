@@ -5,8 +5,6 @@ Java native, mobile optimized AdGem Android SDK.
 
 This is an extended version of the simplified integration guide [here][1].
 
-PlayStore: https://play.google.com/store/apps/details?id=com.adgem.android.example
-
 Download
 --------
 [![Maven Central](https://img.shields.io/maven-central/v/com.adgem/adgem-android?style=flat-square)](https://search.maven.org/artifact/com.adgem/adgem-android)
