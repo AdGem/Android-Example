@@ -15,8 +15,6 @@ updates:
     commit-message:
       prefix: "build(actions-deps)"
       prefix-development: "build(actions-deps-dev)"
-    reviewers:
-      - "adgem/sdk-developers"
     rebase-strategy: "disabled"
 
 
@@ -28,6 +26,4 @@ updates:
     commit-message:
       prefix: "build(gradle-deps)"
       prefix-development: "build(gradle-deps-dev)"
-    reviewers:
-      - "adgem/sdk-developers"
     rebase-strategy: "disabled"
