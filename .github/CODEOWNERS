@@ -1,7 +1,7 @@
 # GitHub Actions workflows
 /.github/workflows/ @adgem/sdk-developers
 
-# Gradle Kotlin DSL dependencies
+# Gradle Kotlin 
 /build.gradle.kts @adgem/sdk-developers
 /settings.gradle.kts @adgem/sdk-developers
 /app/build.gradle.kts @adgem/sdk-developers
