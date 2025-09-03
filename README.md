@@ -11,7 +11,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:4.0.1'
+implementation 'com.adgem:adgem-android:4.0.3'
 ```
 
 Maven:
