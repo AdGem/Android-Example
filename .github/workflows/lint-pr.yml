@@ -29,5 +29,6 @@ jobs:
             test
             style
             perf
+            deps
           validateSingleCommit: true
 
