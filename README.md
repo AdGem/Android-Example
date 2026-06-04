@@ -11,7 +11,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:4.0.3'
+implementation 'com.adgem:adgem-android:4.2.3'
 ```
 
 Maven:
@@ -19,7 +19,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>4.0.1</version>
+  <version>4.2.3</version>
   <type>pom</type>
 </dependency>
 ```
@@ -32,7 +32,7 @@ compileOptions {
 }
 ```
 
-AdGem Android SDK requires a minimum of Android 5.0.
+AdGem Android SDK requires a minimum of Android 6.0 (API 23).
 
 Overview
 --------

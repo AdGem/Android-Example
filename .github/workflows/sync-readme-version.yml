@@ -1,0 +1,40 @@
+name: Sync README version
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "app/build.gradle.kts"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Extract AdGem SDK version from build.gradle.kts
+        id: version
+        run: |
+          VERSION=$(grep 'com.adgem:adgem-android:' app/build.gradle.kts | sed 's/.*adgem-android:\([^"]*\)".*/\1/')
+          echo "sdk_version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Update README with current version
+        run: |
+          SDK_VERSION="${{ steps.version.outputs.sdk_version }}"
+          sed -i "s/com\.adgem:adgem-android:[0-9]\+\.[0-9]\+\.[0-9]\+/com.adgem:adgem-android:${SDK_VERSION}/g" README.md
+          sed -i "s|<version>[0-9]\+\.[0-9]\+\.[0-9]\+</version>|<version>${SDK_VERSION}</version>|" README.md
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet README.md || {
+            git add README.md
+            git commit -m "docs: sync README AdGem SDK version to ${SDK_VERSION} [skip ci]"
+            git push
+          }
+        env:
+          SDK_VERSION: ${{ steps.version.outputs.sdk_version }}
