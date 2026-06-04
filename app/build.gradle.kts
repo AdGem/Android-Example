@@ -8,7 +8,7 @@ android {
     compileSdk = 36
     defaultConfig {
         applicationId = "com.adgem.android.example"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 18
         versionName = "1.18"
