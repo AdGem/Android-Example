@@ -19,6 +19,10 @@ jobs:
         id: version
         run: |
           VERSION=$(grep 'com.adgem:adgem-android:' app/build.gradle.kts | sed 's/.*adgem-android:\([^"]*\)".*/\1/')
+          if [ -z "$VERSION" ]; then
+            echo "Failed to extract AdGem SDK version from app/build.gradle.kts" >&2
+            exit 1
+          fi
           echo "sdk_version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Update README with current version
