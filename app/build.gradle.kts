@@ -1,11 +1,10 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.adgem.example"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.adgem.android.example"
         minSdk = 23
@@ -14,7 +13,9 @@ android {
         versionName = "1.18"
     }
 
-    viewBinding.isEnabled = true
+    buildFeatures {
+        viewBinding = true
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -29,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation("com.adgem:adgem-android:4.2.3")
+    implementation("com.adgem:adgem-android:5.0.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.14.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
