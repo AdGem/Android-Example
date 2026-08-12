@@ -5,4 +5,5 @@
     <string name="error">Error</string>
     <string name="user_rewarded">User was rewarded with %1$d</string>
     <string name="offer_wall_closed_hint">Offer wall rewards may come in later</string>
+    <string name="offer_wall_load_failed">Offer wall failed (%1$s): %2$s</string>
 </resources>

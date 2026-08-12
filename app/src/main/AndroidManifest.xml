@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <application android:allowBackup="false"
+    <application android:name="com.adgem.example.ExampleApplication"
+                 android:allowBackup="false"
                  android:label="@string/app_name"
                  android:icon="@mipmap/ic_launcher"
                  android:roundIcon="@mipmap/ic_launcher_round"
@@ -18,9 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <meta-data android:name="com.adgem.Config"
-                   android:resource="@xml/adgem_config"/>
 
     </application>
 

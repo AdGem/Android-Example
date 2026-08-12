@@ -11,7 +11,7 @@ Download
 
 Gradle:
 ```groovy
-implementation 'com.adgem:adgem-android:4.2.3'
+implementation 'com.adgem:adgem-android:5.0.0'
 ```
 
 Maven:
@@ -19,7 +19,7 @@ Maven:
 <dependency>
   <groupId>com.adgem</groupId>
   <artifactId>adgem-android</artifactId>
-  <version>4.2.3</version>
+  <version>5.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -32,23 +32,44 @@ compileOptions {
 }
 ```
 
-AdGem Android SDK requires a minimum of Android 6.0 (API 23).
+Requirements
+--------
+
+| | |
+|---|---|
+| Minimum Android | 6.0 (API 23) |
+| `compileSdk` | 37 or later |
+| Android Gradle plugin | 9.1.0 or later |
+
+The `compileSdk` and AGP floors come from `androidx.core:core-ktx:1.19.0`, which the SDK depends
+on — AGP 8.x builds fail to resolve it. AGP 9 supplies Kotlin itself, so a project that applied
+`org.jetbrains.kotlin.android` must drop that plugin when it upgrades; see
+[AGP built-in Kotlin](https://kotl.in/gradle/agp-built-in-kotlin).
 
 Overview
 --------
-AdGem Android SDK library is automatically downloaded by the build system. To configure SDK for your project:
-1. Add ```adgem_config.xml``` to ```res/xml``` folder of your project structure:
-```xml
-<adgem-configuration 
-            applicationId="ADGEM_APP_ID"
-            offerwallEnabled="true|false" 
-            lockOrientation="true|false" />
+The SDK is initialized explicitly. Call `initialize` once before any other AdGem call —
+typically in `Application.onCreate()`:
+
+```kotlin
+class ExampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        AdGem.get().initialize(this, AdGemConfig.Builder("ADGEM_APP_ID").build())
+    }
+}
 ```
-2. Add following tag to ```<application>``` to the ```AndroidManifest.xml```:
+
+Register the class in your `AndroidManifest.xml`:
 ```xml
-<meta-data android:name="com.adgem.Config"
-           android:resource="@xml/adgem_config"/>
+<application android:name=".ExampleApplication" ... >
 ```
+
+> **Upgrading from 4.x:** `res/xml/adgem_config.xml` and the `com.adgem.Config` manifest
+> meta-data are no longer read. Delete both and pass your App ID through `AdGemConfig.Builder`.
+> The `offerwallEnabled`, `lockOrientation` and `debuggable` options have no 5.x equivalent.
+
+Call `close()` on logout, or before re-initializing with a different configuration.
 
 R8/ProGuard
 --------
@@ -63,16 +84,19 @@ AdGem adgem = AdGem.get();
 There is no need to store instance of AdGem globally. The SDK will cache the instance on a first call and will always return the same one for all subsequent calls to ```AdGem.get();```
 
 ### Player Metadata:
-For increased fraud protection, we require you set the `playerId`  (a unique id for your user) parameter.
+For increased fraud protection, we require you set the `playerId` (a unique id for your user,
+max 256 characters) parameter. Call `setPlayer` once the player identity is known — this may be
+at startup or later, e.g. after login.
+
 ```java
-  PlayerMetadata player = new PlayerMetadata.Builder.createWithPlayerId("myPlayerId")
+  PlayerMetadata player = new PlayerMetadata.Builder("myPlayerId")
     .age(23)
     .iapTotalUsd(10)
     .level(4)
     .placement(2)
     .isPayer(true)
     .gender(PlayerMetadata.Gender.FEMALE)
-    .createdAt("2018-11-16 06:23:19.07")
+    .createdAt(new Date())
     .customField1("custom_field_1")
     .customField2("custom_field_2")
     .customField3("custom_field_3")
@@ -80,19 +104,19 @@ For increased fraud protection, we require you set the `playerId`  (a unique id 
     .customField5("custom_field_5")
     .build();
 
-  adgem.setPlayerMetaData(player);
+  adgem.setPlayer(player);
 ```
+
+`createdAt` takes a `java.util.Date` and is serialized in UTC. Values outside the documented
+bounds are logged and skipped rather than sent.
+
+> **Upgrading from 4.x:** `Builder.createWithPlayerId()` and the no-arg `Builder()` are replaced
+> by `Builder(String playerId)`; `setPlayerMetaData()` is now `setPlayer()`; `createdAt` takes a
+> `Date` instead of a `String`.
 
 ### Offer Wall:
-AdGem will download and prepare the Offer Wall as it is configured in AdGem configuration XML:
-```xml
-<adgem-configuration 
-  ...
-  offerWallEnabled="true|false"
-  ... />
-```
-
-Once the Offer Wall is ready, AdGem will notify a subscriber via the ```OfferWallCallback```:
+Once the Offer Wall is ready, AdGem will notify a subscriber via the ```OfferwallCallback```.
+Every method has a default implementation, so override only the ones you need:
 ```java
   OfferwallCallback callback = new OfferwallCallback() {
       @Override
@@ -106,8 +130,10 @@ Once the Offer Wall is ready, AdGem will notify a subscriber via the ```OfferWal
       }
 
       @Override
-      public void onOfferwallLoadingFailed(String error) {
+      public void onOfferwallLoadingFailed(AdGemError error) {
           // Notifies that the offer wall has failed to load.
+          // Inspect error.getKind() to handle specific cases: NOT_INITIALIZED,
+          // NOT_READY, OFFERWALL_UNAVAILABLE, INTERNAL.
       }
 
       @Override
@@ -126,7 +152,9 @@ Offer wall callback may be registered through the instance of ```AdGem```:
 AdGem adgem = AdGem.get();
 adgem.registerOfferwallCallback(callback);
 ```
-Once registered, a callback will be used to deliver the offer wall updates.
+Once registered, a callback will be used to deliver the offer wall updates. All callback methods
+are invoked on the main thread, and `registerOfferwallCallback` / `unregisterOfferwallCallback`
+must themselves be called from the main thread.
 
 Keep in mind that AdGem will hold a strong reference to a callback. It is the caller’s responsibility to unregister it. For example, if a callback is being registered in activity’s `onCreate()` then it must be unregistered in corresponding `onDestroy()` call.
 

@@ -7,10 +7,14 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.adgem.android.AdGem
+import com.adgem.android.AdGemError
 import com.adgem.android.BuildConfig
 import com.adgem.android.OfferwallCallback
 import com.adgem.android.PlayerMetadata
 import com.adgem.example.databinding.ActivityAdgemBinding
+import java.util.Calendar
+import java.util.GregorianCalendar
+import java.util.TimeZone
 import java.util.UUID
 
 class AdGemActivity : AppCompatActivity(), OfferwallCallback {
@@ -51,8 +55,8 @@ class AdGemActivity : AppCompatActivity(), OfferwallCallback {
         showMessage(R.string.offer_wall_closed_hint)
     }
 
-    override fun onOfferwallLoadingFailed(error: String?) {
-        error?.let { showMessage(it) }
+    override fun onOfferwallLoadingFailed(error: AdGemError) {
+        showMessage(getString(R.string.offer_wall_load_failed, error.kind.name, error.message))
     }
 
     private fun showMessage(@StringRes text: Int) {
@@ -73,9 +77,16 @@ class AdGemActivity : AppCompatActivity(), OfferwallCallback {
             sharedPreferences.edit().putString(playerIdKey, playerId).apply()
         }
 
-        val metadata = PlayerMetadata.Builder.createWithPlayerId(playerId)
+        // 5.0.0 takes a Date and serializes it in UTC, so pin the calendar to UTC to keep
+        // the wire value identical to the "2018-11-10 18:39:45" this used to send.
+        val createdAt = GregorianCalendar(TimeZone.getTimeZone("UTC")).apply {
+            clear()
+            set(2018, Calendar.NOVEMBER, 10, 18, 39, 45)
+        }.time
+
+        val metadata = PlayerMetadata.Builder(playerId)
             .age(32)
-            .createdAt("2018-11-10 18:39:45")
+            .createdAt(createdAt)
             .gender(PlayerMetadata.Gender.FEMALE)
             .iapTotalUsd(123f)
             .level(100)
@@ -86,6 +97,6 @@ class AdGemActivity : AppCompatActivity(), OfferwallCallback {
             .customField4("custom_field_4")
             .customField5("custom_field_5")
             .build()
-        AdGem.get().setPlayerMetaData(metadata)
+        adGem.setPlayer(metadata)
     }
 }
