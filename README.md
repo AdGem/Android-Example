@@ -67,7 +67,7 @@ Register the class in your `AndroidManifest.xml`:
 
 > **Upgrading from 4.x:** `res/xml/adgem_config.xml` and the `com.adgem.Config` manifest
 > meta-data are no longer read. Delete both and pass your App ID through `AdGemConfig.Builder`.
-> The `offerwallEnabled` and `lockOrientation` options have no 5.x equivalent.
+> The `offerwallEnabled`, `lockOrientation` and `debuggable` options have no 5.x equivalent.
 
 Call `close()` on logout, or before re-initializing with a different configuration.
 
