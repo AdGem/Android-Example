@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.PUBLIC_REPO_BOT_GITHUB_TOKEN }}
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.314.0
         with:
           ruby-version: 3.2
           bundler-cache: true
@@ -45,7 +45,7 @@ jobs:
           mkdir -p ./fastlane/gcp
           echo $FIREBASE_SERVICE_ACCOUNT > ./fastlane/gcp/android-sdk-play-store.json
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.314.0
         with:
           ruby-version: 3.2
           bundler-cache: true
