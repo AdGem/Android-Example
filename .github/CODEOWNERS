@@ -1,3 +1,6 @@
+# Default owner for any path not matched below (last matching pattern wins)
+* @adgem/sdk-developers
+
 # GitHub Actions workflows
 /.github/workflows/ @adgem/sdk-developers
 
